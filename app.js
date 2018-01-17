@@ -3,23 +3,25 @@ const fs = require('fs');
 
 // 3rd Party Modules
 const _ = require('lodash');
+const yargs = require('yargs');
 
 // Custom Modules
 const notes = require('./notes');
 
-// Getting Argument in CLI
-var command = process.argv[2];
+// Getting Arugment using Yargs module
+const argv = yargs.argv;
 
-console.log('Command ', command);
+// Getting Argument in CLI
+var command = yargs._[0];
 
 if(command === 'add'){
-    console.log('Adding New Note');
+    node.addNote(argv.title, argv.body);
 }else if(command === 'list'){
-    console.log('Listing All Notes');
+    notes.getAll();
 }else if(command === 'read'){
-    console.log('Reading Note');
+    notes.getNote(argv.title);
 }else if(command === 'remove'){
-    console.log('Removing Note');
+    notes.removeNote(argv.title);
 }else{
     console.log('Command Not Recognized');
 }
