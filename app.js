@@ -15,13 +15,23 @@ const argv = yargs.argv;
 var command = yargs._[0];
 
 if(command === 'add'){
-    node.addNote(argv.title, argv.body);
+    var note = node.addNote(argv.title, argv.body);
+    if(note){
+        console.log('Adding Note Successful');
+        console.log('-----------------');
+        console.log(`Title : ${note.title}`);
+        console.log(`Body : ${note.body}`);
+    }else{
+        console.log('Adding Note Failed');
+    }
 }else if(command === 'list'){
     notes.getAll();
 }else if(command === 'read'){
     notes.getNote(argv.title);
 }else if(command === 'remove'){
-    notes.removeNote(argv.title);
+    var noteRemoved = notes.removeNote(argv.title);
+    var message = noteRemoved ? 'Note was Removed' : 'Note not found';
+    console.log(message);
 }else{
     console.log('Command Not Recognized');
 }
