@@ -18,18 +18,19 @@ if(command === 'add'){
     var note = node.addNote(argv.title, argv.body);
     if(note){
         console.log('Adding Note Successful');
-        console.log('-----------------');
-        console.log(`Title : ${note.title}`);
-        console.log(`Body : ${note.body}`);
+        notes.logNote(note);
     }else{
         console.log('Adding Note Failed');
     }
 }else if(command === 'list'){
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(`Printing ${allNotes.length} note(s).`);
+    allNotes.forEach((note) => notes.logNote(note));
 }else if(command === 'read'){
     var note = notes.getNote(argv.title);
     if(note){
-        console.log(note);
+        console.log('Note Found!');
+        notes.logNote(note);
     }else{
         console.log("Note not found!");
     }
