@@ -8,8 +8,27 @@ const yargs = require('yargs');
 // Custom Modules
 const notes = require('./notes');
 
+const titleOption = {
+    describe: 'Title of note',
+    demand: true,
+    alias: 't'
+};
+
 // Getting Arugment using Yargs module
-const argv = yargs.argv;
+const argv = yargs
+    .command('add', 'Add a new note', {
+        title: titleOption,
+        body:{
+            describe: 'Body of note',
+            demand: true,
+            alias: 'b'
+        }
+    }).command('read', 'Read a note', {
+        title: titleOption
+    }).command('list', 'List all notes')
+    .command('remove', 'Remove note', {
+        title: titleOption
+    }).help().argv;
 
 // Getting Argument in CLI
 var command = yargs._[0];
